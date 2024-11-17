@@ -15,7 +15,6 @@ class TopBarFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_top_bar, container, false)
 
-        // Añadir los fragmentos existentes al contenedor de la cabecera
         val userFragment = UserFragment()
         val geminiModelFragment = GeminiModelFragment()
 

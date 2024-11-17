@@ -59,12 +59,12 @@ class MainActivity : AppCompatActivity() {
                 val message = Message("user", userMessage)
                 addMessageToChat(message)
                 userInput.text.clear()
-                sendMessage(apiKey, userMessage)
+                sendMessage(apiKey, messages)
             }
         }
     }
 
-    private fun sendMessage(apiKey: String, prompt: String) {
+    private fun sendMessage(apiKey: String, messageHistory: List<Message>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val generativeModel = GenerativeModel(
@@ -74,6 +74,7 @@ class MainActivity : AppCompatActivity() {
 
                 Log.d("si", generativeModel.modelName)
 
+                val prompt = messageHistory.joinToString("\n") { it.content }
                 val responseStream = generativeModel.generateContentStream(prompt)
 
                 var partialResponse = ""
@@ -89,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                         chatRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
                     }
                 }
+
             } catch (e: Exception) {
                 Log.e("Gemini", "Error: ${e.message}")
                 withContext(Dispatchers.Main) {
