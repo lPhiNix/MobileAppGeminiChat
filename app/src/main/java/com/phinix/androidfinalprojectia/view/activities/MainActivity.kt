@@ -22,7 +22,6 @@ import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
-
     // Componentes de la UI
     private lateinit var userInput: EditText
     private lateinit var sendButton: Button
