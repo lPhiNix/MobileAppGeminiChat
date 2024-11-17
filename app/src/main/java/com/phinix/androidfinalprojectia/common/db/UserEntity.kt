@@ -1,4 +1,4 @@
-package com.phinix.androidfinalprojectia.db
+package com.phinix.androidfinalprojectia.common.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

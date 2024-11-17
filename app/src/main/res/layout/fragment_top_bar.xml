@@ -1,30 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/black"
-    android:padding="8dp"
+    android:padding="12dp"
     android:gravity="center_vertical">
 
-    <!-- Contenedor del fragmento de selección de modelos, centrado horizontalmente -->
+    <!-- Fragmento para el selector de modelos -->
     <FrameLayout
         android:id="@+id/modelFragmentContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:layout_gravity="start"
-        />
+        android:paddingEnd="8dp" />
 
-    <!-- Contenedor del fragmento de usuario, alineado a la derecha -->
+    <!-- Fragmento para el menú de usuario -->
     <FrameLayout
         android:id="@+id/userFragmentContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:layout_gravity="end" />
-
+        android:layout_gravity="end"
+        android:paddingStart="8dp" />
 </LinearLayout>

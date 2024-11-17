@@ -1,4 +1,4 @@
-package com.phinix.androidfinalprojectia.db
+package com.phinix.androidfinalprojectia.common.db
 
 import androidx.room.Dao
 import androidx.room.Insert

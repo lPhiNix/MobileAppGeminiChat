@@ -4,15 +4,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!-- Botón principal que muestra el modelo seleccionado -->
+    <!-- Botón principal para mostrar el modelo seleccionado -->
     <Button
         android:id="@+id/modelSelectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleccionar Modelo"
+        android:background="@drawable/button_background"
         android:textColor="@color/white" />
 
-    <!-- Menú desplegable oculto inicialmente -->
+    <!-- Menú desplegable (inicialmente oculto) -->
     <LinearLayout
         android:id="@+id/modelDropdownMenu"
         android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gemini 1.5 Flash"
+            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
@@ -32,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gemini 2.0 Beta"
+            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
@@ -39,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Da Vinci"
+            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

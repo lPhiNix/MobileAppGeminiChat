@@ -1,35 +1,41 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
+    <!-- Botón inicial -->
     <Button
         android:id="@+id/initialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="A"
+        android:background="@drawable/button_background"
         android:textColor="@color/white" />
 
+    <!-- Menú desplegable (inicialmente oculto) -->
     <LinearLayout
         android:id="@+id/dropdownMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:paddingTop="8dp">
 
         <Button
             android:id="@+id/clearChatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Limpiar Chat" />
+            android:text="Limpiar Chat"
+            android:background="@drawable/button_background_secondary"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cerrar Sesión"
+            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
@@ -37,6 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Borrar Cuenta"
+            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

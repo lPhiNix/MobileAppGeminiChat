@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.phinix.androidfinalprojectia.R
-import com.phinix.androidfinalprojectia.db.UserDatabase
-import com.phinix.androidfinalprojectia.db.UserEntity
+import com.phinix.androidfinalprojectia.common.db.UserDatabase
+import com.phinix.androidfinalprojectia.common.db.UserEntity
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {

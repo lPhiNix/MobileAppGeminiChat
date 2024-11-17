@@ -1,5 +1,6 @@
 package com.phinix.androidfinalprojectia.view.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,10 +15,9 @@ import com.google.ai.client.generativeai.GenerativeModel
 import com.phinix.androidfinalprojectia.R
 import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
 import com.phinix.androidfinalprojectia.common.models.Message
-import com.phinix.androidfinalprojectia.db.ChatMessageEntity
-import com.phinix.androidfinalprojectia.db.UserDatabase
+import com.phinix.androidfinalprojectia.common.db.ChatMessageEntity
+import com.phinix.androidfinalprojectia.common.db.UserDatabase
 import com.phinix.androidfinalprojectia.view.activities.fragments.TopBarFragment
-import com.phinix.androidfinalprojectia.view.activities.fragments.UserFragment
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,14 +28,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private val messages = mutableListOf<Message>()
 
-    private lateinit var db: UserDatabase // Declare the database without initialization here
+    private lateinit var db: UserDatabase
     private var modelName: String = "gemini-1.5-flash"
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize database after onCreate is called
         db = UserDatabase.getDatabase(applicationContext)
 
         val sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
@@ -46,13 +46,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
-        }
-
-        // Cargar mensajes guardados
-        lifecycleScope.launch {
-            val savedMessages = db.chatMessageDao().getMessagesByUser(userName)
-            messages.addAll(savedMessages.map { Message(it.role, it.content) })
-            chatAdapter.notifyDataSetChanged()
         }
 
         val topHeaderFragment = TopBarFragment()
@@ -83,6 +76,12 @@ class MainActivity : AppCompatActivity() {
                 sendMessage(userName, apiKey, messages)
             }
         }
+
+        lifecycleScope.launch {
+            val savedMessages = db.chatMessageDao().getMessagesByUser(userName)
+            messages.addAll(savedMessages.map { Message(it.role, it.content) })
+            chatAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun sendMessage(userName : String, apiKey: String, messageHistory: List<Message>) {
@@ -99,13 +98,13 @@ class MainActivity : AppCompatActivity() {
                 var partialResponse = ""
                 withContext(Dispatchers.Main) {
                     val tempMessage = Message("assistant", "")
-                    addMessageToChat(tempMessage) // Temporarily add an empty message for the assistant
+                    addMessageToChat(tempMessage)
                 }
 
                 responseStream.collect { chunk ->
                     partialResponse += chunk.text
                     withContext(Dispatchers.Main) {
-                        chatAdapter.updateLastMessage(partialResponse) // Update the last message in the adapter
+                        chatAdapter.updateLastMessage(partialResponse)
                         chatRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
                     }
                 }
@@ -129,11 +128,9 @@ class MainActivity : AppCompatActivity() {
         chatRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun clearMessages() {
         messages.clear()
         chatAdapter.notifyDataSetChanged()
     }
-
-    fun getMessages() = messages
-    fun getChatAdapter() = chatAdapter
 }

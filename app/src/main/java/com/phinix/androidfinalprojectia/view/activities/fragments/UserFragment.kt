@@ -11,11 +11,9 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.phinix.androidfinalprojectia.R
-import com.phinix.androidfinalprojectia.common.models.Message
-import com.phinix.androidfinalprojectia.db.UserDatabase
+import com.phinix.androidfinalprojectia.common.db.UserDatabase
 import com.phinix.androidfinalprojectia.view.activities.LoginActivity
 import com.phinix.androidfinalprojectia.view.activities.MainActivity
-import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

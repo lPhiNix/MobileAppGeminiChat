@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.phinix.androidfinalprojectia.R
 import androidx.lifecycle.lifecycleScope
-import com.phinix.androidfinalprojectia.db.UserDatabase
+import com.phinix.androidfinalprojectia.common.db.UserDatabase
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

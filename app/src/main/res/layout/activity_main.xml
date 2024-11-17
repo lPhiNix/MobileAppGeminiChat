@@ -1,45 +1,57 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="0dp">
 
-    <!-- Contenedor para el fragmento de cabecera -->
+    <!-- Encabezado superior -->
     <FrameLayout
         android:id="@+id/topHeaderContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!-- Resto de la interfaz, como el chat -->
+    <!-- Contenedor principal del chat -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <!-- RecyclerView para los mensajes del chat -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:clipToPadding="false" />
 
+        <!-- Campo para escribir mensajes -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="#333333">
 
             <EditText
                 android:id="@+id/userInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Escribe un mensaje" />
+                android:hint="Escribe un mensaje..."
+                android:background="@drawable/input_background"
+                android:padding="12dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
 
             <Button
                 android:id="@+id/sendButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enviar" />
+                android:text="Enviar"
+                android:background="@drawable/button_background"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
