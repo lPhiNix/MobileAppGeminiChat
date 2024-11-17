@@ -15,7 +15,7 @@ class GeminiModelFragment : Fragment() {
     private lateinit var modelGemini20: Button
     private lateinit var modelDaVinci: Button
 
-    var selectedModel: String = "Gemini 1.5 Flash"
+    var selectedModel: String = ""
         private set
 
     var onModelSelected: ((String) -> Unit)? = null
@@ -26,21 +26,17 @@ class GeminiModelFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_gemini_model, container, false)
 
-        // Referencias a los componentes del menú
         modelSelectionButton = view.findViewById(R.id.modelSelectionButton)
         modelDropdownMenu = view.findViewById(R.id.modelDropdownMenu)
         modelGemini15 = view.findViewById(R.id.modelGemini15)
         modelGemini20 = view.findViewById(R.id.modelGemini20)
         modelDaVinci = view.findViewById(R.id.modelDaVinci)
 
-        // Configurar interacción
         modelSelectionButton.setOnClickListener {
             toggleDropdownMenu()
         }
 
-        modelGemini15.setOnClickListener { updateModel("Gemini 1.5 Flash") }
-        modelGemini20.setOnClickListener { updateModel("Gemini 2.0 Beta") }
-        modelDaVinci.setOnClickListener { updateModel("Da Vinci") }
+        modelGemini15.setOnClickListener { updateModel("gemini-1.5-flash") }
 
         return view
     }

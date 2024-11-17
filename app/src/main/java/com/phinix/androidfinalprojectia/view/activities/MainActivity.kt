@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
 import com.phinix.androidfinalprojectia.R
 import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
-import com.phinix.androidfinalprojectia.view.activities.fragments.UserFragment
 import com.phinix.androidfinalprojectia.common.models.Message
-import com.phinix.androidfinalprojectia.view.activities.fragments.GeminiModelFragment
 import com.phinix.androidfinalprojectia.view.activities.fragments.TopBarFragment
 import kotlinx.coroutines.*
 
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private val messages = mutableListOf<Message>()
 
-    private var modelName: String = ""
+    private var modelName: String = "gemini-1.5-flash"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,13 +40,11 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // Añadir el nuevo fragmento de cabecera
         val topHeaderFragment = TopBarFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.topHeaderContainer, topHeaderFragment)
             .commit()
 
-        // Configuración restante de la actividad...
         userInput = findViewById(R.id.userInput)
         sendButton = findViewById(R.id.sendButton)
         chatRecyclerView = findViewById(R.id.chatRecyclerView)
@@ -75,6 +71,8 @@ class MainActivity : AppCompatActivity() {
                     modelName = modelName,
                     apiKey = apiKey
                 )
+
+                Log.d("si", generativeModel.modelName)
 
                 val responseStream = generativeModel.generateContentStream(prompt)
 
