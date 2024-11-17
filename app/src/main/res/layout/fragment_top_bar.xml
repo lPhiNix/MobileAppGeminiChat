@@ -2,9 +2,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/black"
+    android:background="@color/dark_blue"
     android:padding="12dp"
     android:gravity="center_vertical">
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:contentDescription="" />
 
     <!-- Fragmento para el selector de modelos -->
     <FrameLayout
@@ -12,7 +18,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingEnd="8dp" />
+        android:layout_gravity="center_horizontal"
+        android:paddingEnd="8dp"
+        android:layout_marginLeft="10dp"
+        />
 
     <!-- Fragmento para el menú de usuario -->
     <FrameLayout
@@ -20,5 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:paddingStart="8dp" />
+        android:paddingStart="8dp"
+        />
 </LinearLayout>

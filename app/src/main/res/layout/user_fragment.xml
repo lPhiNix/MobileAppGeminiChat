@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -7,10 +6,11 @@
     <!-- Botón inicial -->
     <Button
         android:id="@+id/initialButton"
-        android:layout_width="wrap_content"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:backgroundTint="@color/bold_blue"
         android:text="A"
-        android:background="@drawable/button_background"
         android:textColor="@color/white" />
 
     <!-- Menú desplegable (inicialmente oculto) -->
@@ -19,31 +19,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:visibility="gone">
+
 
         <Button
             android:id="@+id/clearChatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/bold_blue"
             android:text="Limpiar Chat"
-            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/bold_blue"
             android:text="Cerrar Sesión"
-            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
             android:id="@+id/deleteAccountButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/bold_blue"
             android:text="Borrar Cuenta"
-            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

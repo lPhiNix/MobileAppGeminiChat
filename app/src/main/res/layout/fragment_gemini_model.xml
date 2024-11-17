@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,8 +8,8 @@
         android:id="@+id/modelSelectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/bold_blue"
         android:text="Seleccionar Modelo"
-        android:background="@drawable/button_background"
         android:textColor="@color/white" />
 
     <!-- Menú desplegable (inicialmente oculto) -->
@@ -25,24 +24,33 @@
             android:id="@+id/modelGemini15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/bold_blue"
             android:text="Gemini 1.5 Flash"
-            android:background="@drawable/button_background_secondary"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/modelGemini20"
+            android:id="@+id/modelGemini158b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gemini 2.0 Beta"
-            android:background="@drawable/button_background_secondary"
+            android:backgroundTint="@color/bold_blue"
+            android:text="Gemini 1.5 Flash 8-b"
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/modelDaVinci"
+            android:id="@+id/modelGemini15pro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Da Vinci"
-            android:background="@drawable/button_background_secondary"
+            android:backgroundTint="@color/bold_blue"
+            android:text="Gemini 1.5 Pro"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/modelGemini10pro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/bold_blue"
+            android:text="Gemini 1.0 Pro"
+
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@color/darker_blue"
     android:padding="16dp">
 
     <TextView
@@ -54,6 +55,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Registrarse"
-        android:background="@drawable/button_background"
+        android:backgroundTint="@color/bold_blue"
         android:textColor="@color/white" />
 </LinearLayout>

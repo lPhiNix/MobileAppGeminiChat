@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val messages = mutableListOf<Message>()
 
     private lateinit var db: UserDatabase
-    private var modelName: String = "gemini-1.5-flash"
+    private var modelName: String = ""
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,5 +132,9 @@ class MainActivity : AppCompatActivity() {
     fun clearMessages() {
         messages.clear()
         chatAdapter.notifyDataSetChanged()
+    }
+
+    fun setModelName(name : String) {
+        modelName = name
     }
 }
