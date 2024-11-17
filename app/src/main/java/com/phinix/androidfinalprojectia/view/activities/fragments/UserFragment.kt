@@ -20,15 +20,23 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Fragmento que maneja las interacciones del usuario, como logout, eliminar cuenta y borrar el chat.
+ */
 class UserFragment : Fragment() {
 
+    // Componentes de la vista que se enlazarán con los botones y menús desplegables.
     private lateinit var initialButton: Button
     private lateinit var clearChatButton: ImageButton
     private lateinit var logoutButton: ImageButton
     private lateinit var deleteAccountButton: ImageButton
     private lateinit var dropdownMenu: LinearLayout
+
     private lateinit var userDatabase: UserDatabase
 
+    /**
+     * Inflamos la vista y configuramos las acciones para los botones.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,13 +52,16 @@ class UserFragment : Fragment() {
 
         userDatabase = UserDatabase.getDatabase(requireContext())
 
+        // Recuperación del nombre del usuario desde preferencias compartidas
         val sharedPref = activity?.getSharedPreferences("UserPref", Context.MODE_PRIVATE)
         val userName = sharedPref?.getString("name", "") ?: ""
 
+        // Establecer la inicial del nombre del usuario si está presente
         if (userName.isNotEmpty()) {
             initialButton.text = userName.first().uppercaseChar().toString()
         }
 
+        // Configuración del botón que despliega las opciones del usuario
         initialButton.setOnClickListener {
             dropdownMenu.visibility = if (dropdownMenu.visibility == View.GONE) {
                 View.VISIBLE
@@ -59,6 +70,7 @@ class UserFragment : Fragment() {
             }
         }
 
+        // Configuración del botón de logout
         logoutButton.setOnClickListener {
             with(sharedPref?.edit()) {
                 this?.clear()
@@ -68,6 +80,7 @@ class UserFragment : Fragment() {
             activity?.finish()
         }
 
+        // Configuración del botón para eliminar la cuenta
         deleteAccountButton.setOnClickListener {
             lifecycleScope.launch {
                 withContext(Dispatchers.IO) {
@@ -82,6 +95,7 @@ class UserFragment : Fragment() {
             }
         }
 
+        // Configuración del botón para borrar el historial de chat
         clearChatButton.setOnClickListener {
             val mainActivity = activity as? MainActivity
             mainActivity?.clearMessages()

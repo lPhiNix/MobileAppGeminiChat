@@ -8,14 +8,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import com.phinix.androidfinalprojectia.R
 
+/**
+ * Fragmento que contiene la barra superior de la interfaz, donde se encuentra el enlace al repositorio y otros fragmentos.
+ */
 class TopBarFragment : Fragment() {
 
+    // Botón para abrir el URL del repositorio.
     private lateinit var openUrlButton: ImageButton
 
+    /**
+     * Inflamos la vista del fragmento y configuramos el enlace y los fragmentos secundarios.
+     */
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +32,7 @@ class TopBarFragment : Fragment() {
         val userFragment = UserFragment()
         val geminiModelFragment = GeminiModelFragment()
 
+        // Configuración del botón para abrir el enlace al repositorio de GitHub.
         openUrlButton = view.findViewById(R.id.openUrlButton)
         openUrlButton.setOnClickListener {
             val url = "https://github.com/lPhiNix/MobileAppGeminiChat"
@@ -34,6 +41,7 @@ class TopBarFragment : Fragment() {
             startActivity(intent)
         }
 
+        // Transacción de fragmentos para mostrar UserFragment y GeminiModelFragment
         childFragmentManager.beginTransaction()
             .replace(R.id.userFragmentContainer, userFragment)
             .commit()

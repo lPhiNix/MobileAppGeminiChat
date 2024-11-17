@@ -11,8 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import com.phinix.androidfinalprojectia.common.db.UserDatabase
 import kotlinx.coroutines.launch
 
+/**
+ * Fragmento para manejar el inicio de sesión de los usuarios.
+ */
 class LoginActivity : AppCompatActivity() {
 
+    /**
+     * Se configura la vista y la lógica de inicio de sesión.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -31,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val user = db.userDao().getUser(name, password)
                 if (user != null) {
+                    // Guardar el nombre en SharedPreferences
                     val sharedPref = getSharedPreferences("UserPref", MODE_PRIVATE)
                     with(sharedPref.edit()) {
                         putString("name", user.name)
@@ -40,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                     finish()
                 } else {
+                    // Si el usuario no está registrado, se muestra un mensaje
                     Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
                 }
             }
