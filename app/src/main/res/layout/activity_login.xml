@@ -6,6 +6,12 @@
     android:background="@color/darker_blue"
     android:padding="16dp">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="170dp"
+        android:background="@drawable/title"
+        />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

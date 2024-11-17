@@ -11,7 +11,8 @@
         android:layout_gravity="end"
         android:backgroundTint="@color/bold_blue"
         android:text="A"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        />
 
     <!-- Menú desplegable (inicialmente oculto) -->
     <LinearLayout
@@ -19,32 +20,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="end"
         android:paddingTop="8dp"
         android:visibility="gone">
 
 
-        <Button
+        <ImageButton
             android:id="@+id/clearChatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/bold_blue"
-            android:text="Limpiar Chat"
-            android:textColor="@color/white" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/clean_chat_icon"
+            android:layout_marginBottom="10dp"
+           />
 
-        <Button
+        <ImageButton
             android:id="@+id/logoutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/bold_blue"
-            android:text="Cerrar Sesión"
-            android:textColor="@color/white" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/log_out_icon"
+            android:layout_marginBottom="10dp"
+             />
 
-        <Button
+        <ImageButton
             android:id="@+id/deleteAccountButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/bold_blue"
-            android:text="Borrar Cuenta"
-            android:textColor="@color/white" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/delete_account_icon"
+          />
     </LinearLayout>
 </LinearLayout>

@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val messages = mutableListOf<Message>()
 
     private lateinit var db: UserDatabase
-    private var modelName: String = ""
+    private var modelName: String = "gemini-1.5-flash"
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {

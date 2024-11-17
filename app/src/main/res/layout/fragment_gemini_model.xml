@@ -6,7 +6,7 @@
     <!-- Botón principal para mostrar el modelo seleccionado -->
     <Button
         android:id="@+id/modelSelectionButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/bold_blue"
         android:text="Seleccionar Modelo"
@@ -22,7 +22,7 @@
 
         <Button
             android:id="@+id/modelGemini15"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bold_blue"
             android:text="Gemini 1.5 Flash"
@@ -30,7 +30,7 @@
 
         <Button
             android:id="@+id/modelGemini158b"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bold_blue"
             android:text="Gemini 1.5 Flash 8-b"
@@ -38,7 +38,7 @@
 
         <Button
             android:id="@+id/modelGemini15pro"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bold_blue"
             android:text="Gemini 1.5 Pro"
@@ -46,7 +46,7 @@
 
         <Button
             android:id="@+id/modelGemini10pro"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/bold_blue"
             android:text="Gemini 1.0 Pro"

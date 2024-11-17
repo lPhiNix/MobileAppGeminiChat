@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -22,9 +23,9 @@ import kotlinx.coroutines.withContext
 class UserFragment : Fragment() {
 
     private lateinit var initialButton: Button
-    private lateinit var clearChatButton: Button
-    private lateinit var logoutButton: Button
-    private lateinit var deleteAccountButton: Button
+    private lateinit var clearChatButton: ImageButton
+    private lateinit var logoutButton: ImageButton
+    private lateinit var deleteAccountButton: ImageButton
     private lateinit var dropdownMenu: LinearLayout
     private lateinit var userDatabase: UserDatabase
 
