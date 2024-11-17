@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/black"
+    android:padding="8dp">
+
+    <!-- Contenedor del fragmento de usuario -->
+    <FrameLayout
+        android:id="@+id/userFragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingEnd="8dp"
+        />
+
+    <!-- Contenedor del fragmento de selección de modelos -->
+    <FrameLayout
+        android:id="@+id/modelFragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:paddingStart="8dp"
+        />
+
+</LinearLayout>
