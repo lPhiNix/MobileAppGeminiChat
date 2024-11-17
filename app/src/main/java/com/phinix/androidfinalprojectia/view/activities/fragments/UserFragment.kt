@@ -11,8 +11,12 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.phinix.androidfinalprojectia.R
+import com.phinix.androidfinalprojectia.common.models.Message
 import com.phinix.androidfinalprojectia.db.UserDatabase
 import com.phinix.androidfinalprojectia.view.activities.LoginActivity
+import com.phinix.androidfinalprojectia.view.activities.MainActivity
+import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,6 +24,7 @@ import kotlinx.coroutines.withContext
 class UserFragment : Fragment() {
 
     private lateinit var initialButton: Button
+    private lateinit var clearChatButton: Button
     private lateinit var logoutButton: Button
     private lateinit var deleteAccountButton: Button
     private lateinit var dropdownMenu: LinearLayout
@@ -32,6 +37,7 @@ class UserFragment : Fragment() {
         val view = inflater.inflate(R.layout.user_fragment, container, false)
 
         initialButton = view.findViewById(R.id.initialButton)
+        clearChatButton = view.findViewById(R.id.clearChatButton)
         logoutButton = view.findViewById(R.id.logoutButton)
         deleteAccountButton = view.findViewById(R.id.deleteAccountButton)
         dropdownMenu = view.findViewById(R.id.dropdownMenu)
@@ -74,6 +80,15 @@ class UserFragment : Fragment() {
                 }
                 startActivity(Intent(activity, LoginActivity::class.java))
                 activity?.finish()
+            }
+        }
+
+        clearChatButton.setOnClickListener {
+            val mainActivity = activity as? MainActivity
+            mainActivity?.clearMessages()
+
+            CoroutineScope(Dispatchers.IO).launch {
+                userDatabase.chatMessageDao().deleteAllMessagesByUser(userName!!)
             }
         }
 

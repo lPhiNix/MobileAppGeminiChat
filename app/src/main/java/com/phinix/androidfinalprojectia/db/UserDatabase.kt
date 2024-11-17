@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [UserEntity::class], version = 1)
+@Database(entities = [UserEntity::class, ChatMessageEntity::class], version = 2)
 abstract class UserDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun chatMessageDao(): ChatMessageDao
 
     companion object {
         @Volatile private var INSTANCE: UserDatabase? = null
@@ -18,7 +21,9 @@ abstract class UserDatabase : RoomDatabase() {
                     context.applicationContext,
                     UserDatabase::class.java,
                     "user_database"
-                ).build()
+
+                ) .fallbackToDestructiveMigration().build()
+
                 INSTANCE = instance
                 instance
             }

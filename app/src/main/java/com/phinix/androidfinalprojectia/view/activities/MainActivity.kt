@@ -7,13 +7,17 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.ai.client.generativeai.GenerativeModel
 import com.phinix.androidfinalprojectia.R
 import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
 import com.phinix.androidfinalprojectia.common.models.Message
+import com.phinix.androidfinalprojectia.db.ChatMessageEntity
+import com.phinix.androidfinalprojectia.db.UserDatabase
 import com.phinix.androidfinalprojectia.view.activities.fragments.TopBarFragment
+import com.phinix.androidfinalprojectia.view.activities.fragments.UserFragment
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -24,11 +28,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chatAdapter: ChatAdapter
     private val messages = mutableListOf<Message>()
 
+    private lateinit var db: UserDatabase // Declare the database without initialization here
     private var modelName: String = "gemini-1.5-flash"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Initialize database after onCreate is called
+        db = UserDatabase.getDatabase(applicationContext)
 
         val sharedPref = getSharedPreferences("UserPref", Context.MODE_PRIVATE)
         val userName = sharedPref.getString("name", null)
@@ -38,6 +46,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
+        }
+
+        // Cargar mensajes guardados
+        lifecycleScope.launch {
+            val savedMessages = db.chatMessageDao().getMessagesByUser(userName)
+            messages.addAll(savedMessages.map { Message(it.role, it.content) })
+            chatAdapter.notifyDataSetChanged()
         }
 
         val topHeaderFragment = TopBarFragment()
@@ -58,13 +73,19 @@ class MainActivity : AppCompatActivity() {
             if (userMessage.isNotBlank()) {
                 val message = Message("user", userMessage)
                 addMessageToChat(message)
+
+                lifecycleScope.launch {
+                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "user", content = userMessage)
+                    db.chatMessageDao().insertMessage(chatMessageEntity)
+                }
+
                 userInput.text.clear()
-                sendMessage(apiKey, messages)
+                sendMessage(userName, apiKey, messages)
             }
         }
     }
 
-    private fun sendMessage(apiKey: String, messageHistory: List<Message>) {
+    private fun sendMessage(userName : String, apiKey: String, messageHistory: List<Message>) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val generativeModel = GenerativeModel(
@@ -72,23 +93,26 @@ class MainActivity : AppCompatActivity() {
                     apiKey = apiKey
                 )
 
-                Log.d("si", generativeModel.modelName)
-
                 val prompt = messageHistory.joinToString("\n") { it.content }
                 val responseStream = generativeModel.generateContentStream(prompt)
 
                 var partialResponse = ""
                 withContext(Dispatchers.Main) {
                     val tempMessage = Message("assistant", "")
-                    addMessageToChat(tempMessage)
+                    addMessageToChat(tempMessage) // Temporarily add an empty message for the assistant
                 }
 
                 responseStream.collect { chunk ->
                     partialResponse += chunk.text
                     withContext(Dispatchers.Main) {
-                        chatAdapter.updateLastMessage(partialResponse)
+                        chatAdapter.updateLastMessage(partialResponse) // Update the last message in the adapter
                         chatRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
                     }
+                }
+
+                lifecycleScope.launch {
+                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "assistant", content = partialResponse)
+                    db.chatMessageDao().insertMessage(chatMessageEntity)
                 }
 
             } catch (e: Exception) {
@@ -104,4 +128,12 @@ class MainActivity : AppCompatActivity() {
         chatAdapter.addMessage(message)
         chatRecyclerView.scrollToPosition(chatAdapter.itemCount - 1)
     }
+
+    fun clearMessages() {
+        messages.clear()
+        chatAdapter.notifyDataSetChanged()
+    }
+
+    fun getMessages() = messages
+    fun getChatAdapter() = chatAdapter
 }
