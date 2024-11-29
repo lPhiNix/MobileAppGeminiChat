@@ -42,6 +42,7 @@
                 android:layout_weight="1"
                 android:hint="Escribe un mensaje..."
                 android:background="@drawable/input_background"
+                android:inputType="textMultiLine"
                 android:padding="12dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white" />
