@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 /**
  * Clase abstracta que define la base de datos de Room, configurando las tablas y DAOs.
  */
-@Database(entities = [UserEntity::class, ChatMessageEntity::class], version = 2)
+@Database(entities = [UserEntity::class, ChatMessageEntity::class], version = 3)
 abstract class UserDatabase : RoomDatabase() {
 
     // Referencias a los DAOs definidos.

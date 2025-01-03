@@ -71,14 +71,15 @@ class MainActivity : AppCompatActivity() {
 
         // Envío de mensajes del usuario
         sendButton.setOnClickListener {
+            val createAt = System.currentTimeMillis()
             val userMessage = userInput.text.toString()
             if (userMessage.isNotBlank()) {
-                val message = Message("user", userMessage)
+                val message = Message("user", userMessage, createAt)
                 addMessageToChat(message)
 
                 // Guardar el mensaje en la base de datos
                 lifecycleScope.launch {
-                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "user", content = userMessage)
+                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "user", content = userMessage, createdAt = createAt)
                     db.chatMessageDao().insertMessage(chatMessageEntity)
                 }
 
@@ -90,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         // Cargar los mensajes guardados de la base de datos
         lifecycleScope.launch {
             val savedMessages = db.chatMessageDao().getMessagesByUser(userName)
-            messages.addAll(savedMessages.map { Message(it.role, it.content) })
+            messages.addAll(savedMessages.map { Message(it.role, it.content, it.createdAt) })
             chatAdapter.notifyDataSetChanged()
         }
     }
@@ -101,6 +102,7 @@ class MainActivity : AppCompatActivity() {
      */
     private fun sendMessage(userName : String, apiKey: String, messageHistory: List<Message>) {
         CoroutineScope(Dispatchers.IO).launch {
+            val createAt = System.currentTimeMillis()
             try {
                 val generativeModel = GenerativeModel(
                     modelName = modelName,
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
                 var partialResponse = ""
                 withContext(Dispatchers.Main) {
-                    val tempMessage = Message("assistant", "")
+                    val tempMessage = Message("assistant", "", createAt)
                     addMessageToChat(tempMessage)
                 }
 
@@ -126,14 +128,14 @@ class MainActivity : AppCompatActivity() {
 
                 // Guardar la respuesta generada en la base de datos
                 lifecycleScope.launch {
-                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "assistant", content = partialResponse)
+                    val chatMessageEntity = ChatMessageEntity(userName = userName!!, role = "assistant", content = partialResponse, createdAt = createAt)
                     db.chatMessageDao().insertMessage(chatMessageEntity)
                 }
 
             } catch (e: Exception) {
                 Log.e("Gemini", "Error: ${e.message}")
                 withContext(Dispatchers.Main) {
-                    addMessageToChat(Message("assistant", "Error: ${e.message}"))
+                    addMessageToChat(Message("assistant", "Error: ${e.message}", createAt))
                 }
             }
         }

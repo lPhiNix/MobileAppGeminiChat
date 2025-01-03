@@ -12,5 +12,6 @@ data class ChatMessageEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0, // ID autogenerado para identificar el mensaje.
     val userName: String, // Usuario asociado al mensaje.
     val role: String, // Rol del emisor del mensaje (e.g., "user" o "assistant").
-    val content: String // Contenido del mensaje.
+    val content: String, // Contenido del mensaje.
+    val createdAt: Long // Timestamp de la fecha y hora de creación
 )
