@@ -17,7 +17,9 @@ import com.phinix.androidfinalprojectia.view.adapter.ChatAdapter
 import com.phinix.androidfinalprojectia.common.models.Message
 import com.phinix.androidfinalprojectia.common.db.ChatMessageEntity
 import com.phinix.androidfinalprojectia.common.db.UserDatabase
+import com.phinix.androidfinalprojectia.view.activities.fragments.DateSearchFragment
 import com.phinix.androidfinalprojectia.view.activities.fragments.TopBarFragment
+import com.phinix.androidfinalprojectia.view.activities.fragments.UserFragment
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chatRecyclerView: RecyclerView
     private lateinit var chatAdapter: ChatAdapter
     private val messages = mutableListOf<Message>()
+
+    private lateinit var topHeaderFragment: TopBarFragment
+    private lateinit var dateSearchFragment: DateSearchFragment
 
     // Base de datos y configuración del modelo de IA predeterminado
     private lateinit var db: UserDatabase
@@ -55,9 +60,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Configuración del fragmento superior
-        val topHeaderFragment = TopBarFragment()
+        topHeaderFragment = TopBarFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.topHeaderContainer, topHeaderFragment)
+            .commit()
+
+        dateSearchFragment = DateSearchFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.dateSearchContainer, dateSearchFragment)
             .commit()
 
         // Configuración de la UI
@@ -154,5 +164,26 @@ class MainActivity : AppCompatActivity() {
 
     fun setModelName(name : String) {
         modelName = name
+    }
+
+    fun getDateSearchFragment(): DateSearchFragment {
+        return dateSearchFragment
+    }
+
+    fun getTopHeaderFragment(): TopBarFragment {
+        return topHeaderFragment
+    }
+
+    fun getMessages(): List<Message> {
+        return messages
+    }
+
+    fun getAdapter(): ChatAdapter {
+        return chatAdapter
+    }
+
+    fun filterMessagesByDate(selectedDate: String) {
+        Log.d("MainActivity", "Filtering messages by date: $selectedDate")
+        topHeaderFragment.getUserFragment().filterMessagesByDate(selectedDate) // Pasar la fecha al UserFragment
     }
 }

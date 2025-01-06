@@ -19,6 +19,9 @@ class TopBarFragment : Fragment() {
     // Botón para abrir el URL del repositorio.
     private lateinit var openUrlButton: ImageButton
 
+    private val userFragment = UserFragment()
+    private val geminiModelFragment = GeminiModelFragment()
+
     /**
      * Inflamos la vista del fragmento y configuramos el enlace y los fragmentos secundarios.
      */
@@ -28,9 +31,6 @@ class TopBarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_top_bar, container, false)
-
-        val userFragment = UserFragment()
-        val geminiModelFragment = GeminiModelFragment()
 
         // Configuración del botón para abrir el enlace al repositorio de GitHub.
         openUrlButton = view.findViewById(R.id.openUrlButton)
@@ -51,5 +51,9 @@ class TopBarFragment : Fragment() {
             .commit()
 
         return view
+    }
+
+    fun getUserFragment(): UserFragment {
+        return userFragment
     }
 }

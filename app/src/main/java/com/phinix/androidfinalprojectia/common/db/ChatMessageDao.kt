@@ -38,4 +38,10 @@ interface ChatMessageDao {
      */
     @Query("DELETE FROM chat_messages WHERE userName = :userName")
     suspend fun deleteAllMessagesByUser(userName: String)
+
+    @Query("SELECT * FROM chat_messages WHERE createdAt LIKE :date")
+    fun getMessagesByDate(date: String): List<ChatMessageEntity>
+
+    @Query("SELECT * FROM chat_messages")
+    fun getAllMessages(): List<ChatMessageEntity>
 }

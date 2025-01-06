@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Fondo del DatePicker -->
+        <item name="android:background">@color/darker_blue</item>
+        <!-- Color de los botones -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- Color de los números del DatePicker -->
+        <item name="android:textColorSecondary">@color/bold_blue</item>
+    </style>
+</resources>
